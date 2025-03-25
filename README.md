@@ -2,11 +2,11 @@
 ## 
 While trying to generate images using black-forest-labs/FLUX.1-dev I realized the model (fp16) was too large to be loaded into a single gpu. You could improve the speed of image generation if you handle text encoding first and either split the transformer model across multiple gpus or load multiple instances of the transformer. 
 
-You can apply adapters to both the transformers as well as the text encoders
+You can apply adapters to both the transformers as well as the text encoders, if the size of the adapters plus the transformer doesn't exceed the size of the GPU vram, you can run multiple flux instances if you do vae image decoding separately. 
 
 The inference pipeline breaks down the generation process into several stages:
 1. Text Embedding Generation
-2. Transformer Processing
+2. noise_pred w/ Transformer
 3. VAE Decoding and Image Generation
 
 
@@ -36,7 +36,7 @@ python run_inference_pipeline.py
 - Processes input prompts
 - Cleans up memory after generation
 
-### 2. Transformer Processing
+### 2. noise_pred w/ Transformer
 - Loads the Flux transformer model across devices
 - Applies LoRA adapters to the transformer model
 - Processes the embeddings to generate latents
