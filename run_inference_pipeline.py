@@ -251,7 +251,7 @@ if __name__ == "__main__":
             "local_files_only": True,
         },
         {
-            "subfolder": "transformer_3",
+            "subfolder": "transformer",
             "device_map": "auto",
             "max_memory": max_memory,
             "torch_dtype": torch.bfloat16,
