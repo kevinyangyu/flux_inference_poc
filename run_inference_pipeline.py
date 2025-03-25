@@ -223,10 +223,12 @@ def run_inference(
 
 if __name__ == "__main__":
     args = parse_args()
+    # assuming the adapter and model is downloaded locally, you can remove local_files_only=True but I've only tested it locally.
     
     # Create output directory if it doesn't exist
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
 
+    
     adapter_options = {
         "weight_name": args.adapter_weight_name,
         "return_alphas": True,
